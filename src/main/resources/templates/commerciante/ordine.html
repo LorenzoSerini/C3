@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ordine</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="/commerciante">Home</a> | <a href="/commerciante/ordini">Tutti gli ordini</a>
+    <h1>Dettagli ordine</h1>
+    <p><b>Ordine</b>: <code th:text="${ordine.id}"></code></p>
+    <p>
+        <b>Cliente</b>:
+        <th:block th:text="${ordine.cliente.nome} + ' ' + ${ordine.cliente.cognome}" />
+        (<code th:text="${ordine.cliente.email}"></code>)
+    </p>
+    <p>
+        <b>Stato ordine</b>:
+        <code th:text="${ordine.stato.name()}"></code>
+    </p>
+    <table>
+        <tr>
+            <th>Prodotto</th>
+            <th>Prezzo</th>
+        </tr>
+        <tr th:each="prod : ${ordine.prodotti}">
+            <td th:text="${prod.descrizione}" class="right"></td>
+            <td th:text="${prod.prezzo}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr /></td>
+        </tr>
+        <tr>
+            <td><em>Totale</em></td>
+            <td><em th:text="${ordine.getPrice()}"></em></td>
+        </tr>
+    </table>
+    <th:block th:if="${ordine.stato.name() == 'IN_ATTESA'}">
+        <form action="/commerciante/ordine/accetta" method="get"
+            class="form-horizontal">
+
+            <input type="hidden" name="id" th:value="${ordine.id}">
+
+            <label for="selPr">Punto di ritiro:</label>
+            <select id="selPr" name="idPuntoRitiro">
+                <option th:each="pr : ${puntiRitiro}"
+                        th:value="${pr.id}"
+                        th:text="${pr.indirizzo}"></option>
+            </select>
+
+            <button type="submit">Accetta ordine</button>
+        </form>
+        <a th:href="@{/commerciante/ordine/rifiuta(id=${ordine.id})}">
+            <button type="button">Rifiuta ordine</button>
+        </a>
+    </th:block>
+</body>
+</html>

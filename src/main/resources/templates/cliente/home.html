@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h2>
+    Cliente (<th:block th:text="${cliente.email}"/>) &mdash; Home
+</h2>
+
+<p>
+    <a href="/cliente/carrello">Carrello</a> &nbsp; | &nbsp;
+    <a href="/cliente/ordini">I miei ordini</a> &nbsp; | &nbsp;
+    <a href="/cliente/consegne">Consegne effettuate</a> &nbsp; | &nbsp;
+    <a href="/disconnetti">Disconnetti</a>
+</p>
+
+<h4>Punti vendita</h4>
+<div class="card-container">
+    <div class="card" th:each="pv : ${puntiVendita}">
+        <a th:href="@{/cliente/puntoVendita(id=${pv.id})}">
+            <p class="card-text" th:text="${pv.nome}"></p>
+        </a>
+        <p class="card-details" th:text="${pv.posizione}"></p>
+    </div>
+</div>
+
+<h4>Offerte</h4>
+<div class="card-container">
+    <div class="card" th:each="offerta : ${offerte}">
+        <p class="card-text" th:text="${offerta.descrizione}"></p>
+        <code class="card-text" th:text="${offerta.importo}"></code>
+        <p class="card-details" th:if="${offerta.scadenza != null}">
+            Scade il
+            <th:block th:text="${offerta.scadenza}"/>
+        </p>
+        <p class="card-details">Dove:
+           <a
+           th:href="@{/cliente/puntoVendita(id=${offerta.puntoVendita.id})}"
+            th:text="${offerta.puntoVendita.nome}">
+           </a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

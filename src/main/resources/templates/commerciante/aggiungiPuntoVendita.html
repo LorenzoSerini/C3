@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aggiungi punto vendita</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/commerciante">Home</a>
+
+<h1>Aggiungi punto vendita</h1>
+<p>
+    Associa al commerciante:
+    <th:block th:text="${commerciante.nome} + ' ' + ${commerciante.cognome}"/>
+</p>
+
+<form action="/commerciante/aggiungiPuntoVendita" method="post">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required>
+
+    <label for="posizione">Posizione</label>
+    <input type="text" name="posizione" id="posizione" placeholder="Via e numero civico" required>
+
+    <input type="submit" value="Aggiungi">
+</form>
+</body>
+</html>

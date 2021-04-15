@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Autenticazione amministratori</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            padding: 0 15vw;
+        }
+
+        h2, h3 {
+            margin: 0 0 .5rem;
+        }
+
+        form {
+            display: flex;
+            flex-flow: column nowrap;
+            margin: .5rem;
+        }
+
+        input {
+            margin-bottom: .6rem;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>C3</h2>
+<h3>Autenticazione amministratori</h3>
+<form action="/authAdmin" method="post">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+
+    <input type="submit" value="Accedi">
+</form>
+<a href="/auth">Accesso utenti</a>
+<p th:text="${error}" class="error"></p>
+</body>
+</html>

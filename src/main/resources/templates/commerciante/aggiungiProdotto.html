@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aggiungi prodotto</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="/commerciante">Home</a> /
+    <a th:href="@{'/commerciante/puntoVendita'(id=${puntoVendita.id})}">Punto vendita</a>
+
+    <h1>Aggiungi prodotto</h1>
+    <p>Aggiungi nel punto vendita: <th:block th:text="${puntoVendita.nome}"/></p>
+    <form action="/commerciante/puntoVendita/aggiungiProdotto" method="post">
+        <input type="hidden" name="idPuntoVendita" th:value="${puntoVendita.id}">
+
+        <label for="nome">Descrizione del prodotto</label>
+        <input type="text" name="nome" id="nome" required>
+
+        <label for="prezzo">Prezzo</label>
+        <input type="number" min="0" value="0" step="0.01" name="prezzo" id="prezzo" required>
+
+        <input type="submit" value="Aggiungi">
+    </form>
+</body>
+</html>

@@ -1,0 +1,92 @@
+/****  Card layout  ****/
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    min-width: 10em;
+    margin: .8em;
+}
+
+.card-text {
+    margin: .4em;
+}
+
+.card-details {
+    font-size: .8em;
+    font-family: sans-serif;
+    margin: .4em;
+}
+
+/****  Tables  ****/
+
+table {
+    font-size: .8rem;
+    font-family: sans-serif;
+}
+
+th {
+    text-align: left;
+}
+
+th:not(:first-child), td:not(:first-child) {
+    padding-left: 1em;
+}
+
+/****  Forms  ****/
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    margin: .5rem;
+}
+
+form input {
+    margin: .25rem 0;
+}
+
+.form-submit-button {
+    align-self: stretch;
+}
+
+/****  Misc  ****/
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+a {
+    white-space: nowrap;
+}
+
+.form-horizontal {
+    display: inline-block;
+}
+
+.muted {
+    color: gray;
+    font-style: italic;
+}
+
+.error {
+    color: red;
+}
+
+.center-row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.center-column {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

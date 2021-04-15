@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Autenticazione</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            padding: 0 15vw;
+        }
+
+        h2, h3 {
+            margin: 0 0 .5rem;
+        }
+
+        form {
+            display: flex;
+            flex-flow: column nowrap;
+            margin: .5rem;
+        }
+
+        input, select {
+            margin-bottom: .6rem;
+        }
+
+        .selector {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        select {
+            flex-grow: 1;
+            margin-left: .5em;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>C3</h2>
+    <h3>Autenticazione</h3>
+    <form action="/auth" method="post">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" placeholder="esempio@example.com">
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password">
+
+        <div class="selector">
+            <label for="tipo">Ruolo</label>
+            <select id="tipo" name="tipoUtente">
+                <option value="cliente">Cliente</option>
+                <option value="corriere">Corriere</option>
+                <option value="commerciante">Commerciante</option>
+            </select>
+        </div>
+
+        <input type="submit" value="Accedi">
+    </form>
+    <p>Non hai un account? <a href="/registra">Registrati</a></p>
+    <p><a href="/authAdmin">Accesso gestori</a></p>
+    <p th:text="${error}" class="error"></p>
+</body>
+</html>

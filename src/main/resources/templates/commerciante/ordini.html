@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ordini</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/commerciante">Home</a>
+<h1>Ordini</h1>
+<form action="/commerciante/ordini" method="get" class="form-horizontal">
+    <label for="filtro">Stato:</label>
+    <select name="stato" id="filtro">
+        <option value="QUALSIASI" th:selected="${filtro == 'QUALSIASI'}">Qualsiasi</option>
+        <option value="IN_ATTESA" th:selected="${filtro == 'IN_ATTESA'}">In attesa</option>
+        <option value="ACCETTATO" th:selected="${filtro == 'ACCETTATO'}">Accettato</option>
+        <option value="RIFIUTATO" th:selected="${filtro == 'RIFIUTATO'}">Rifiutato</option>
+    </select>
+    <input type="submit" value="Applica filtro">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Cliente</th>
+        <th>Stato</th>
+        <th>Numero prodotti</th>
+        <th>Punto vendita</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ordine : ${ordini}">
+        <td th:text="${ordine.cliente.nome} + ' ' +  ${ordine.cliente.cognome}"></td>
+        <td th:text="${ordine.stato}"></td>
+        <td th:text="${ordine.prodotti.size()}"></td>
+        <td th:text="${ordine.puntoVendita.nome}"></td>
+        <td>
+            <a th:href="@{'/commerciante/ordine'(id=${ordine.id})}">Vedi</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

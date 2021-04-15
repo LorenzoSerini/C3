@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Consegne effettuate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/cliente">Home</a>
+
+<h2>Consegne effettuate</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Prodotti</th>
+        <th>Punto vendita</th>
+        <th>Ritirabile</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="consegna : ${consegne}">
+        <td th:text="${consegna.ordine.prodotti.size()}"></td>
+        <td th:text="${consegna.ordine.puntoVendita.nome}"></td>
+        <td>
+            <th:block th:if="${consegna.ritirabile}">
+                <a th:href="@{/cliente/ritiro(id=${consegna.id})}">Ritira</a>
+            </th:block>
+            <th:block th:if="${!consegna.ritirabile}">
+                Da pagare presso il punto vendita
+            </th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

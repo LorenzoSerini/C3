@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I miei ordini</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/cliente">Home</a>
+<h1>Ordini</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Punto vendita</th>
+        <th>Numero prodotti</th>
+        <th>Stato</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ordine : ${ordini}">
+        <td th:text="${ordine.puntoVendita.nome}"></td>
+        <td th:text="${ordine.prodotti.size()}"></td>
+        <td th:text="${ordine.stato}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

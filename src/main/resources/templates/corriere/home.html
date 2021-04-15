@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Corriere</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h2>Corriere (<span th:text="${emailCorriere}"></span>) &mdash; Home</h2>
+
+<p class="menu">
+    <a href="/disconnetti">Disconnetti</a>
+</p>
+
+<h3>Consegne prese in carico da me</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Dal punto vendita</th>
+        <th>Al punto ritiro</th>
+        <th>Codice</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${consegneInCarico}">
+        <td th:text="${c.ordine.puntoVendita.nome}"></td>
+        <td th:text="${c.puntoRitiro.indirizzo}"></td>
+        <td><code th:text="${c.id}"></code></td>
+        <td>
+            <a th:href="@{/corriere/effettuata(idConsegna=${c.id})}">Effettuata</a> |
+            <a th:href="@{/corriere/annulla(idConsegna=${c.id})}">Annulla presa in carico</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Consegne in attesa</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Dal punto vendita</th>
+        <th>Al punto ritiro</th>
+        <th>Codice</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${consegneInAttesa}">
+        <td th:text="${c.ordine.puntoVendita.nome}"></td>
+        <td th:text="${c.puntoRitiro.indirizzo}"></td>
+        <td><code th:text="${c.id}"></code></td>
+        <td>
+            <a th:href="@{/corriere/prendiInCarico(idConsegna=${c.id})}">Prendi in carico</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

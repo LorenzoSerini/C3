@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            padding: 0 15vw;
+        }
+
+        h2, h3 {
+            margin: 0 0 .5rem;
+        }
+
+        form {
+            display: flex;
+            flex-flow: column nowrap;
+            margin: .5rem;
+        }
+
+        input, select {
+            margin-bottom: .6rem;
+        }
+
+        .selector {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        select {
+            flex-grow: 1;
+            margin-left: .5em;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<script>
+    function clientValidate() {
+        const pass1 = document.getElementById('password').value;
+        const pass2 = document.getElementById('password-verify').value;
+        return pass1 === pass2;
+    }
+</script>
+<body>
+<h2>C3</h2>
+<h3>Registrazione</h3>
+<form action="/registra" method="post" onsubmit="return clientValidate();">
+    <label for="nome">Nome</label>
+    <input id="nome" name="nome" type="text" placeholder="Mario" required>
+
+    <label for="cognome">Cognome</label>
+    <input id="cognome" name="cognome" type="text" placeholder="Rossi" required>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="text" placeholder="esempio@example.com" required>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required>
+
+    <label for="password-verify">Ripeti password</label>
+    <input id="password-verify" type="password" required>
+
+    <div class="selector">
+        <label for="tipo">Ruolo</label>
+        <select id="tipo" name="tipoUtente">
+            <option value="cliente">Cliente</option>
+            <option value="corriere">Corriere</option>
+            <option value="commerciante">Commerciante</option>
+        </select>
+    </div>
+
+    <input type="submit" value="Registra utente">
+</form>
+<p>Hai già un account? <a href="/auth">Accedi</a></p>
+<p th:text="${success}" class="success"></p>
+<p th:text="${error}" class="error"></p>
+</body>
+</html>

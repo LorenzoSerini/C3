@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aggiungi punto ritiro</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/gestore">Home gestore</a>
+<h3>Aggiungi punto ritiro</h3>
+<form action="/gestore/aggiungiPuntoRitiro" method="post">
+    <label for="indirizzo">Indirizzo</label>
+    <input type="text" name="indirizzo" id="indirizzo" placeholder="Via e numero civico">
+
+    <label for="capienza">Capienza (numero di slot)</label>
+    <input type="number" min="0" step="1" name="capienza" id="capienza" value="0">
+
+    <input type="submit" value="Aggiungi">
+</form>
+</body>
+</html>

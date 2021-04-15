@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Abilita ritiro consegna</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/commerciante">Home</a>
+
+<h2>Abilita ritiro consegna</h2>
+<h3>Consegne prese in carico o effettuate</h3>
+
+<div class="card-container">
+    <div class="card" th:each="consegna : ${consegne}">
+        <p class="card-details">
+            Cliente:
+            <th:block th:text="${consegna.ordine.cliente.nome} + ' ' + ${consegna.ordine.cliente.cognome}"/>
+        </p>
+        <p class="card-details">
+            <th:block th:text="${consegna.ordine.prodotti.size()}"/> prodotti
+            <a class="card-details"
+               th:href="@{/commerciante/ordine(id=${consegna.ordine.id})}">
+                Vai all'ordine
+            </a>
+        </p>
+        <p class="card-details">
+            Stato:
+            <b th:text="${consegna.stato.name()}"></b>
+        </p>
+        <th:block th:if="${consegna.corriere != null}">
+            <p class="card-details">
+                Corriere:
+                <th:block th:text="${consegna.corriere.nome} + ' ' + ${consegna.corriere.cognome}"/>
+            </p>
+            <p class="card-details">
+                Punto ritiro:
+                <th:block th:text="${consegna.puntoRitiro.indirizzo}"/>
+            </p>
+        </th:block>
+        <p class="card-details">
+            Ritirabile: <th:block th:text="${consegna.ritirabile ? 'sì' : 'no'}"/>
+            <form action="/commerciante/abilitaRitiroConsegna" method="post"
+                th:if="${!consegna.ritirabile}">
+                <input type="hidden" name="id" th:value="${consegna.id}">
+                <input type="submit" value="Abilita ritiro">
+            </form>
+        </p>
+    </div>
+</div>
+</body>
+</html>

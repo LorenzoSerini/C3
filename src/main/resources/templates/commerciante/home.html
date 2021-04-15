@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Commerciante</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h2>Commerciante (<span th:text="${emailCommerciante}"></span>) &mdash; Home</h2>
+
+    <p class="menu">
+        <a class="text-nowrap" href="/commerciante/aggiungiPuntoVendita">Aggiungi punto vendita</a> &nbsp; | &nbsp;
+        <a class="text-nowrap" href="/commerciante/ordini">Visualizza tutti gli ordini</a> &nbsp; | &nbsp;
+        <a class="text-nowrap" href="/commerciante/abilitaRitiroConsegna">Abilita ritiro consegna</a>&nbsp;| &nbsp;
+        <a class="text-nowrap" href="/disconnetti">Disconnetti</a>
+    </p>
+
+    <h4>Punti vendita</h4>
+    <div class="card-container">
+        <div class="card" th:each="pv : ${puntiVendita}">
+            <a th:href="@{'/commerciante/puntoVendita'(id=${pv.id})}">
+                <p class="card-text" th:text="${pv.nome}"></p>
+            </a>
+            <p class="card-details" th:text="${pv.posizione}"></p>
+        </div>
+    </div>
+
+    <h4>Ordini in attesa</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>N. Prodotti</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ordine : ${ordiniInAttesa}">
+                <td th:text="${ordine.cliente.nome} + ' ' + ${ordine.cliente.cognome}"></td>
+                <td th:text="${ordine.cliente.email}"></td>
+                <td th:text="${ordine.prodotti.size()}"></td>
+                <td>
+                    <a th:href="@{'/commerciante/ordine'(id=${ordine.id})}">Vedi ordine</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

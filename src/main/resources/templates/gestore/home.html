@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Amministrazione</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Gestore applicazione</h1>
+    <p>
+        <a href="/gestore/aggiungiPuntoRitiro">Aggiungi punto ritiro</a> &nbsp; | &nbsp;
+        <a href="/authAdmin/disconnetti">Disconnetti</a>
+    </p>
+
+    <h3>Punti di ritiro</h3>
+
+    <div class="card-container">
+        <div class="card" th:each="pr : ${puntiRitiro}">
+            <p class="card-text" th:text="${pr.indirizzo}"></p>
+            <p class="card-details">
+                <th:block th:text="${pr.slotDisponibili}"/> /
+                <b th:text="${pr.capienza}"></b> slot disponibili
+            </p>
+            <a class="card-details" th:href="@{/gestore/eliminaPuntoRitiro(id=${pr.id})}">
+                Elimina
+            </a>
+        </div>
+    </div>
+</body>
+</html>

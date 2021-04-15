@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Punto vendita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/cliente">Home</a> &nbsp; | &nbsp;
+<a href="/cliente/carrello">Carrello</a>
+
+<h2 th:text="${puntoVendita.nome}"></h2>
+<p><b>Codice</b>: <code th:text="${puntoVendita.id}"></code></p>
+<p><b>Posizione</b>: <th:block th:text="${puntoVendita.posizione}"/></p>
+
+<h4>Offerte</h4>
+<div class="card-container">
+    <div class="card" th:each="offerta : ${offerte}">
+        <p class="card-text" th:text="${offerta.descrizione}"></p>
+        <code class="card-text" th:text="${offerta.importo}"></code>
+        <p class="card-details" th:if="${offerta.scadenza != null}">
+            Scade il
+            <th:block th:text="${offerta.scadenza}"/>
+        </p>
+    </div>
+</div>
+
+<h4>Prodotti</h4>
+<table>
+    <thead>
+    <tr>
+        <th>Prodotto</th>
+        <th>Prezzo</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${prodotti}">
+        <td th:text="${p.prodotto.descrizione}"></td>
+        <td th:text="'€ ' + ${p.prodotto.prezzo}"></td>
+        <td>
+            <a th:href="@{/cliente/aggiungiAlCarrello(idPuntoVendita=${puntoVendita.id},idProdotto=${p.prodotto.id})}">
+                Aggiungi al carrello
+            </a>
+            &nbsp;
+            <span class="muted" th:if="${p.inCarrello > 0}" th:text="'('+${p.inCarrello}+')'"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

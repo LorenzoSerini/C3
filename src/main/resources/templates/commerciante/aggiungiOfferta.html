@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiungi offerta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="/commerciante">Home</a> /
+    <a th:href="@{'/commerciante/puntoVendita'(id=${puntoVendita.id})}">Punto vendita</a>
+
+    <h1>Aggiungi offerta</h1>
+    <p><b>Punto vendita</b>: <code th:text="${puntoVendita.nome}"></code></p>
+
+    <form action="/commerciante/puntoVendita/aggiungiOfferta" method="post">
+        <input type="hidden" name="idPuntoVendita" th:value="${puntoVendita.id}">
+
+        <label for="descrizione">Descrizione</label>
+        <input type="text" name="descrizione" id="descrizione" required>
+
+        <label for="importo">Importo</label>
+        <input type="text" name="importo" id="importo" placeholder="-10% oppure -5€..." required>
+
+        <div>
+            <input type="checkbox" id="check" onchange="updateScadenza()">
+            <label for="check">È un'offerta a tempo</label>
+        </div>
+
+        <!--suppress HtmlFormInputWithoutLabel -->
+        <input type="datetime-local" name="scadenza" id="scadenza" class="check">
+
+        <input type="submit" value="Aggiungi offerta">
+    </form>
+
+    <script>
+        const check = document.getElementById('check');
+        const scadenza = document.getElementById('scadenza');
+
+        function updateScadenza() {
+            scadenza.hidden = !check.checked;
+            scadenza.required = check.checked;
+        }
+
+        updateScadenza();
+    </script>
+</body>
+</html>

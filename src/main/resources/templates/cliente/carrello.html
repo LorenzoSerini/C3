@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a href="/cliente">Home</a>
+
+<h3>Carrello</h3>
+
+<p>
+    <a href="/cliente/carrello/clear">Svuota</a> &nbsp; | &nbsp;
+    <a href="/cliente/carrello/ordina">Ordina</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Prodotto</th>
+        <th>Punto vendita</th>
+        <th>Prezzo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="pv : ${carrello.entrySet()}">
+        <tr th:each="prod : ${pv.value}">
+            <td th:text="${prod.descrizione}"></td>
+            <td th:text="${pv.key.nome}"></td>
+            <td th:text="'€ ' + ${prod.prezzo}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+    <tfoot>
+    <tr><td colspan="3"><hr></td></tr>
+    <tr>
+        <td colspan="2"><b>Totale</b></td>
+        <td th:text="'€ ' + ${totale}"></td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>
